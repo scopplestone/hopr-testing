@@ -7,7 +7,7 @@
 
 # Welcome to the HOPR Documentation!
 
-![alt](../logo.png)
+![alt](../HOPR.png)
 
 [**HOPR**](https://github.com/hopr-framework/hopr)
 HOPR is an open-source tool for the generation of three-dimensional unstructured high-order meshes.
