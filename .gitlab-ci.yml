@@ -21,6 +21,7 @@ build_gnu:
     - mkdir -p build_gnu ; cd build_gnu
     - if [ -n "${DO_NIGHTLY}" ]; then cmake .. ; fi
     - if [ -z "${DO_NIGHTLY}" ]; then cmake .. -DLIBS_BUILD_HDF5=OFF ; fi
+    - if [ -n "${DO_COVERAGE}" ]; then cmake .. -DCMAKE_BUILD_TYPE=Coverage ; fi
     - make all
 
 clean:
@@ -38,6 +39,25 @@ run_gnu:
     - flexitag
   script:
     - cd tutorials ; ./executeall.sh ../build_gnu/bin/hopr
+      
+run_gnu_test:
+  - stage: test
+  - tags: 
+    - flexitag
+  - rules: 
+    - if '${DO_COVERAGE}'
+  - needs: ["run_gnu"]
+  - script: 
+    - gcovr --json --print-summary -o coverage_run_gnu.json -r ${CI_PROJECT_DIR}
+    - gcovr --add-tracefile coverage_run_gnu.json --html-details coverage_run_gnu.html -r ${CI_PROJECT_DIR}
+  coverage: /^\s*lines:\s*\d+.\d+\%/
+  artifacts:
+    name: ${CI_PIPELINE_ID}-${CI_COMMIT_REF_NAME}-${CI_COMMIT_SHA}
+    expire_in: 4 days
+    paths:
+      - tutorials/coverage_run_gnu.json
+      - tutorials/coverage_run_gnu.html
+      
 
 doxygen:
   stage: documentation
