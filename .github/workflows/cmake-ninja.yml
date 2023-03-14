@@ -40,7 +40,7 @@ jobs:
       #run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
       # hdf5-openmpi-devel on centos7 probably broken
       #run: cmake -G Ninja -B ${{github.workspace}}/build -DLIBS_BUILD_HDF5=OFF -DCMAKE_BUILD_TYPE=Release -DLIBS_USE_MPI=OFF
-      run: cmake -G Ninja -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=Release -DLIBS_USE_MPI=OFF
+      run: cmake -G Ninja -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=Release -DLIBS_USE_MPI=OFF  -DCMAKE_INSTALL_PREFIX=/usr
 
     - name: Build
       shell: bash
@@ -48,10 +48,19 @@ jobs:
       #run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
       run: cmake --build ${{github.workspace}}/build
 
+    - name: Create AppImage
+      shell: bash
+      run: |
+        cd ${{github.workspace}}/build
+        make install DESTDIR=AppDir
+        cp ../docs/Meshformat/pics/HOPR_logo.png AppDir/usr/share/icons/hopr.png
+        curl -L -O https://github.com/linuxdeploy/linuxdeploy/releases/download/1-alpha-20220822-1/linuxdeploy-x86_64.AppImage
+        ./linuxdeploy-x86_64.AppImage --appdir AppDir --output appimage --desktop-file=../hopr.desktop
+
     - name: Create archive
       run: |
         mkdir artifact
-        7z a artifact/hopr.zip ${{github.workspace}}/build/bin/hopr
+        7z a artifact/hopr.zip ${{github.workspace}}/build/hopr-*-x86_64.AppImage
 
     # Upload hopr binary archive as an artifact
     - name: Upload artifact
