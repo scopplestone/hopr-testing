@@ -65,7 +65,10 @@ jobs:
         tree AppDir
         pwd
         ls -la
+        pwd
         ls -la ../
+        pwd
+        tree ../docs
         echo docs/Meshformat/pics/HOPR_logo.png
         mkdir -p AppDir/usr/share/icons
         cp ../docs/Meshformat/pics/HOPR_logo.png AppDir/usr/share/icons/hopr.png
