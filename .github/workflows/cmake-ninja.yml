@@ -31,9 +31,10 @@ jobs:
         rpm -U --quiet p7zip-plugins-16.02-20.el7.x86_64.rpm
         yum install -y epel-release
         yum install -y make libasan gcc-gfortran gcc-c++ unzip git openblas-devel lapack-devel zlib-devel tree fuse-sshfs fuse-libs
-        groupadd fuse
+        #groupadd fuse
         user="$(whoami)"
         usermod -a -G fuse "$user"
+        modprobe fuse
         curl -L -O https://github.com/ninja-build/ninja/releases/download/v1.11.1/ninja-linux.zip
         unzip ninja-linux.zip
         mv ./ninja /usr/bin
