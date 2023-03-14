@@ -59,12 +59,12 @@ jobs:
         DESTDIR=AppDir ninja install
         cp ${{github.workspace}}/docs/Meshformat/pics/HOPR_logo.png AppDir/usr/share/icons/hopr.png
         curl -L -O https://github.com/linuxdeploy/linuxdeploy/releases/download/1-alpha-20220822-1/linuxdeploy-x86_64.AppImage
-        ./linuxdeploy-x86_64.AppImage --appdir AppDir --output appimage --desktop-file=../hopr.desktop
+        ./linuxdeploy-x86_64.AppImage --appdir AppDir --output appimage --desktop-file=${{github.workspace}}/hopr.desktop
 
     - name: Create archive
       run: |
         mkdir artifact
-        7z a artifact/hopr.zip ${{github.workspace}}/build/hopr-*-x86_64.AppImage
+        7z a artifact/hopr.zip ${{github.workspace}}/build/AppDir/hopr-*-x86_64.AppImage
 
     # Upload hopr binary archive as an artifact
     - name: Upload artifact
