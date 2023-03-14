@@ -14,6 +14,7 @@ jobs:
     # Use centos7
     container:
       image: centos:7
+      options: --privileged
 
     steps:
     - uses: actions/checkout@v3
