@@ -34,7 +34,8 @@ jobs:
         groupadd fuse
         user="$(whoami)"
         usermod -a -G fuse "$user"
-        modprobe fuse
+        echo "modprobe fuse"
+        #modprobe fuse
         curl -L -O https://github.com/ninja-build/ninja/releases/download/v1.11.1/ninja-linux.zip
         unzip ninja-linux.zip
         mv ./ninja /usr/bin
