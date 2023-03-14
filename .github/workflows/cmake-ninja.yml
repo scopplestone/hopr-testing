@@ -21,8 +21,6 @@ jobs:
 
     - name: Dependencies
       run: |
-        pwd
-        ls -la
         curl -L -O https://github.com/Kitware/CMake/releases/download/v3.16.4/cmake-3.16.4-Linux-x86_64.sh
         chmod +x cmake-3.16.4-Linux-x86_64.sh
         ./cmake-3.16.4-Linux-x86_64.sh --skip-license --prefix=/usr/local
@@ -35,13 +33,9 @@ jobs:
         groupadd fuse
         user="$(whoami)"
         usermod -a -G fuse "$user"
-        echo "modprobe fuse"
-        #modprobe fuse
         curl -L -O https://github.com/ninja-build/ninja/releases/download/v1.11.1/ninja-linux.zip
         unzip ninja-linux.zip
         mv ./ninja /usr/bin
-        pwd
-        ls -la
 
     - name: Configure CMake
       shell: bash
@@ -62,38 +56,20 @@ jobs:
     - name: Create AppImage
       shell: bash
       run: |
-        pwd
-        ls -la
         cd build
-        pwd
-        ls -la
         DESTDIR=AppDir ninja install
-        tree AppDir
-        pwd
-        ls -la
-        pwd
-        ls -la ../
-        pwd
-        tree ../docs
-        echo docs/Meshformat/pics/HOPR_logo.png
         mkdir -p AppDir/usr/share/icons
         cp ../docs/Meshformat/pics/HOPR_logo.png AppDir/usr/share/icons/hopr.png
         curl -L -O https://github.com/linuxdeploy/linuxdeploy/releases/download/1-alpha-20220822-1/linuxdeploy-x86_64.AppImage
+        # curl -L -O https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage
         chmod +x linuxdeploy-x86_64.AppImage
+        tree AppDir
         ./linuxdeploy-x86_64.AppImage --appdir AppDir --output appimage --desktop-file=../hopr.desktop
-        pwd
-        ls -la
 
     - name: Create archive
       run: |
-        pwd
-        ls -la
         mkdir artifact
-        pwd
-        ls -la
         7z a artifact/hopr.zip build/hopr-*-x86_64.AppImage
-        pwd
-        ls -la
 
     # Upload hopr binary archive as an artifact
     - name: Upload artifact
