@@ -78,7 +78,7 @@ jobs:
     - name: Create archive
       run: |
         mkdir artifact
-        7z a artifact/hopr.zip build/AppDir/hopr-*-x86_64.AppImage
+        7z a artifact/hopr.zip build/hopr-*-x86_64.AppImage
 
     # Upload hopr binary archive as an artifact
     - name: Upload artifact
