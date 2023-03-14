@@ -38,7 +38,7 @@ Hindenlang [bibcite key=Hindenlang2015], Gassner [bibcite key=gassner2011disp]
 See figure \ref{mylabel}.
 
 
-```{figure} figures/mpi_shared_mesh/dev_mpi_shared_mesh.png
+```{figure} figures/HOPR.png
 ---
 name: fig:example
 width: 200px

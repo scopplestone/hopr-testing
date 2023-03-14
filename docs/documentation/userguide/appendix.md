@@ -2,9 +2,9 @@
 
 ## Tested compiler combinations
 
-| Dev | Version (Date) |   System    | Compiler |  HDF5  |      MPI      |  CMake   |                  Notes                   |
-| --- | :------------: | :---------: | :------: | :----: | :-----------: | :------: | :--------------------------------------: |
-| PN  | 1.4.0 (Nov 19) | boltzplatz  | gnu7.4.0 | 1.10.5 | openmpi-3.1.3 | 3.15.3-d |                                          |
-| SC  | 1.4.0 (Nov 19) | boltzreggie | gnu9.2.0 | 1.10.5 | openmpi-4.0.1 | 3.15.3-d | Does not work for more than 3 processors |
-|     | 1.4.0 (Nov 19) | boltzreggie | gnu9.2.0 | 1.10.5 | openmpi-4.0.2 | 3.15.3-d |                                          |
+| Dev | Version (Date) |           System          |  Compiler |   HDF5 (pre-compiled)   |      MPI      |   CMake  |  CGNS (pre-compiled) |                   Notes                   |
+| --- | :------------: |  :----------------------: |  :------: | :---------------------: | :-----------: | :------: | :------------------: |          :----------------------:         |
+|  XX |   XX (Nov X)   |    Laptop Ubuntu 22.04    |  gnuX.X.X |          X.X.X          | openmpi-X.X.X |   X.X.X  |         X.X.X        | Does not work with more than 3 processors |
+|  SC | 1.0.0 (Dec 14) | Laptop Ubuntu 22.04.1 LTS | gcc12.2.0 |       1.12.0 (no)       |      OFF      |  3.24.2  |      v3.4.1 (no)     |                                           |
+|  SC | 1.0.0 (Dec 14) | Laptop Ubuntu 22.04.1 LTS | gcc12.2.0 | 12.2.0 (yes, configure) |      OFF      |  3.24.2  |      v3.4.1 (no)     |                                           |
 

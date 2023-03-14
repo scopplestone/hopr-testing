@@ -12,8 +12,6 @@ numbered:
 git_workflow.md
 styleguide.md
 building_guide.md
-reggie.md
-unittest.md
 compiler.md
 examples.md
 ```
@@ -21,14 +19,12 @@ examples.md
 This guide is organized to guide the first implementation steps as well as provide a complete overview of 
 the simulation code's features from a developer's point of view.
 
-* The first Chapter {ref}`developerguide/git_workflow:GitLab Workflow` shall give an overview over the development workflow within
-  the Gitlab environment, and the necessary steps to create a release, deploy updates to the Collaborative Numerics Group and GitHub.
+* The first Chapter {ref}`developerguide/git_workflow:GitHub Workflow` shall give an overview over the development workflow within
+  the GitHub environment, and the necessary steps to create a release and deploy updates to GitHub.
 * The second Chapter {ref}`developerguide/styleguide:Style Guide` describes the rules and guidelines regarding code development 
   such as how the header of functions and subroutines look like.
 * Chapter {ref}`developerguide/building_guide:Building the Documentation` describes how to build the html and pdf files
   locally before committing changes to the repository.
-* Chapter {ref}`developerguide/reggie:Regression Testing` summarizes the PICLas' continuous integration through regression testing.
-* Chapter {ref}`developerguide/unittest:Unit Tests` shows which unit tests are used to test individual key components of the source code.
 * Chapter {ref}`developerguide/compiler:Compiler Options` gives an overview of compiler options that are used in PICLas and their
   purpose.
 * Chapter {ref}`developerguide/examples:Markdown Examples` gives a short overview of how to include code, equations, figures, tables
