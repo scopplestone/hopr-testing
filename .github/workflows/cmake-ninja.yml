@@ -20,6 +20,8 @@ jobs:
 
     - name: Dependencies
       run: |
+        pwd
+        ls -la
         curl -L -O https://github.com/Kitware/CMake/releases/download/v3.16.4/cmake-3.16.4-Linux-x86_64.sh
         chmod +x cmake-3.16.4-Linux-x86_64.sh
         ./cmake-3.16.4-Linux-x86_64.sh --skip-license --prefix=/usr/local
@@ -32,6 +34,8 @@ jobs:
         curl -L -O https://github.com/ninja-build/ninja/releases/download/v1.11.1/ninja-linux.zip
         unzip ninja-linux.zip
         mv ./ninja /usr/bin
+        pwd
+        ls -la
 
     - name: Configure CMake
       shell: bash
@@ -52,11 +56,14 @@ jobs:
       shell: bash
       run: |
         pwd
-        ls
+        ls -la
         cd ${{github.workspace}}/build
         pwd
-        ls
+        ls -la
         DESTDIR=AppDir ninja install
+        pwd
+        ls -la
+        ls -la docs
         cp ${{github.workspace}}/docs/Meshformat/pics/HOPR_logo.png AppDir/usr/share/icons/hopr.png
         curl -L -O https://github.com/linuxdeploy/linuxdeploy/releases/download/1-alpha-20220822-1/linuxdeploy-x86_64.AppImage
         ./linuxdeploy-x86_64.AppImage --appdir AppDir --output appimage --desktop-file=${{github.workspace}}/hopr.desktop
