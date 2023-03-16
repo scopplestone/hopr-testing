@@ -84,7 +84,7 @@ jobs:
         cp build/hopr*x86_64.AppImage artifact/.
 
     - name: Upload artifact
-      uses: actions/upload-artifact@v1
+      uses: actions/upload-artifact@v3
       with:
         name: hopr-binary-v1.1.0
         path: artifact

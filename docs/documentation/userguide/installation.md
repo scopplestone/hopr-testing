@@ -1,9 +1,37 @@
 # Installation
 
-The following chapter describes the installation procedure on a Linux machine requiring root access.
-This includes the installation of required prerequisites, e.g., setting up HDF5.
+The following chapter describes the installation procedure on a Linux machine, possibly requiring root access.
+This may include the installation of required prerequisites, e.g., setting up HDF5.
 Please note that high-performance clusters usually have a module environment, where you have to load the appropriate modules
 instead of compiling them yourself.
+
+## Executable download
+
+HOPR can be installed on a Linux machine without the need of compiling the source code.
+Currently there are two ways by which HOPR is distributed, as a *docker container* and as an *AppImage* executable.
+
+### Docker
+
+Install the package via
+
+    docker pull ghcr.io/hopr-framework/docker-ubuntu20-hopr-exec:latest
+
+### AppImage
+
+Download the pre-compiled (on Centos7) executable from the [release tag assets](https://github.com/hopr-framework/hopr/releases) or from the [GitHub Actions builds](https://github.com/hopr-framework/hopr/actions/runs/4420444576) to get a bleeding-edge version.
+
+The following table shows that there is no apparent drop in performance when using a pre-compiled executable:
+```{table} Performance test with pre-compiled executable: Cart-2D 665600 #Elements
+---
+name: tab:installation_AppImage
+---
+|                      Binary                      |       Laptop      |      Hawk     |  Commit |
+|                 :--------------:                 |    :----------:   |  :----------: | :-----: |
+|                                                  | AMD Ryzen 7 4800H | AMD EPYC 7702 |         |
+|               hopr-x86_64.AppImage               |       22.087      |     29.274    | 0324ba3 |
+| hopr/master/gcc/12.2.0/openmpi/4.1.4/hdf5/1.12.2 |       27.064      |               | afd6756 |
+
+```
 
 ## Prerequisites
 **HOPR** supports Linux-based systems only, requires a x86_64 compliant platform and has been tested on the following platforms
