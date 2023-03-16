@@ -68,12 +68,21 @@ jobs:
         tree AppDir
         ./linuxdeploy-x86_64.AppImage --appdir AppDir --output appimage --desktop-file=../hopr.desktop
 
+    - name: Binary Check
+      if: ${{ ls build/hopr*x86_64.AppImage }} == ''
+      uses: actions/github-script@v3
+      with:
+        script: |
+          core.setFailed('no binary found under build/hopr*x86_64.AppImage')
+
     - name: Create archives
       run: |
+        BINARYNAME=$(ls build/hopr*x86_64.AppImage)
         mkdir artifact
-        cp build/hopr*x86_64.AppImage artifact/.
+        cp build/${BINARYNAME} artifact/.
         mkdir assets
-        7z a assets/hopr-linux64.zip build/hopr*x86_64.AppImage
+        cp build/${BINARYNAME} .
+        7z a assets/hopr-linux64.zip ${BINARYNAME}
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v3
