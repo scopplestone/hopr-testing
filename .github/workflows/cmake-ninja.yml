@@ -92,19 +92,20 @@ jobs:
     - name: Create archives
       run: |
         echo ${BINARYPATH}
-        mkdir artifact
+        mkdir artifacts
         mkdir assets
         cp ${BINARYPATH} .
         echo "BINARYNAME=$(ls hopr*x86_64.AppImage)" >> $GITHUB_ENV
+        echo "BINARYNAME=${BINARYNAME}"
         echo ${BINARYNAME}
         7z a assets/hopr-linux64.zip ${BINARYNAME}
-        mv ${BINARYNAME} artifact/.
+        mv ${BINARYNAME} artifacts/.
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v3
       with:
         name: hopr-binary-v1.1.0
-        path: artifact
+        path: artifacts
 
     - name: Upload release asset
       if: github.event.action == 'published'
