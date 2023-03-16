@@ -96,7 +96,7 @@ jobs:
         mkdir assets
         cp ${BINARYPATH} .
         ls -la
-        echo "BINARYNAME=$(ls hopr*x86_64.AppImage)" >> $GITHUB_ENV
+        echo "BINARYNAME=$(ls hopr*.AppImage)" >> $GITHUB_ENV
         echo "BINARYNAME=${BINARYNAME}"
         echo ${BINARYNAME}
         7z a assets/hopr-linux64.zip ${BINARYNAME}
