@@ -2,7 +2,9 @@ name: cmake-ninja
 
 on:
   push:
-    #pull_request:
+  #pull_request:
+  release:
+    types: published
 
 jobs:
   build:
@@ -60,31 +62,33 @@ jobs:
         DESTDIR=AppDir ninja install
         mkdir -p AppDir/usr/share/icons
         cp ../docs/Meshformat/pics/HOPR_logo.png AppDir/usr/share/icons/hopr.png
-        curl -L -O https://github.com/linuxdeploy/linuxdeploy/releases/download/1-alpha-20220822-1/linuxdeploy-x86_64.AppImage
-        # curl -L -O https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage
+        #curl -L -O https://github.com/linuxdeploy/linuxdeploy/releases/download/1-alpha-20220822-1/linuxdeploy-x86_64.AppImage
+        curl -L -O https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage
         chmod +x linuxdeploy-x86_64.AppImage
         tree AppDir
         ./linuxdeploy-x86_64.AppImage --appdir AppDir --output appimage --desktop-file=../hopr.desktop
 
-    #- name: Create archive
-    #  run: |
-    #    mkdir artifact
-    #    7z a artifact/hopr.zip build/hopr*x86_64.AppImage
-
-    ## Upload hopr binary archive as an artifact
-    #- name: Upload artifact
-    #  uses: actions/upload-artifact@v1
-    #  with:
-    #    name: hopr-binary-archives
-    #    path: artifact
-
-    - name: Create archive
+    - name: Create archives
       run: |
         mkdir artifact
         cp build/hopr*x86_64.AppImage artifact/.
+        mkdir artifact
+        7z a assets/hopr-linux64.zip build/hopr*x86_64.AppImage
 
-    - name: Upload artifact
+    - name: Upload artifacts
       uses: actions/upload-artifact@v3
       with:
         name: hopr-binary-v1.1.0
         path: artifact
+
+   - name: Upload release asset
+      if: github.event.action == 'published'
+      uses: actions/upload-release-asset@v1.0.1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ github.event.release.upload_url }}
+        asset_path: ./assets/hopr-linux64.zip
+        asset_name: hopr-linux64.zip
+        asset_content_type: application/zip
+
