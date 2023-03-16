@@ -69,20 +69,20 @@ jobs:
         ./linuxdeploy-x86_64.AppImage --appdir AppDir --output appimage --desktop-file=../hopr.desktop
 
     - name: Set env
-      run: echo "BINARYNAME=$(ls build/hopr*x86_64.AppImage)" >> $GITHUB_ENV
+      run: echo "BINARYPATH=$(ls build/hopr*x86_64.AppImage)" >> $GITHUB_ENV
 
     - name: Test env variable
       run: |
-        echo ${BINARYNAME}
-        echo ${{env.BINARYNAME}}
+        echo ${BINARYPATH}
+        echo ${{env.BINARYPATH}}
 
     - name: Check file existence
       id: check_files
       uses: andstor/file-existence-action@v1
       with:
-        files: "${{ env.BINARYNAME }}"
+        files: "${{ env.BINARYPATH }}"
 
-    - name: Binary Check
+    - name: Fail if binary does not exist
       if: steps.check_files.outputs.files_exists == 'false'
       uses: actions/github-script@v3
       with:
@@ -91,11 +91,12 @@ jobs:
 
     - name: Create archives
       run: |
-        echo ${BINARYNAME}
+        echo ${BINARYPATH}
         mkdir artifact
-        cp build/${BINARYNAME} artifact/.
+        cp ${BINARYPATH} artifact/.
         mkdir assets
-        cp build/${BINARYNAME} .
+        cp ${BINARYPATH} .
+        BINARYNAME=$(ls hopr*x86_64.AppImage)
         7z a assets/hopr-linux64.zip ${BINARYNAME}
 
     - name: Upload artifacts
