@@ -74,7 +74,6 @@ jobs:
     - name: Test env variable
       run: |
         echo ${BINARYNAME}
-        echo ${env.BINARYNAME}
         echo ${{env.BINARYNAME}}
 
     - name: Check file existence
@@ -92,12 +91,12 @@ jobs:
 
     - name: Create archives
       run: |
-        echo ${env.BINARYNAME}
+        echo ${BINARYNAME}
         mkdir artifact
-        cp build/${env.BINARYNAME} artifact/.
+        cp build/${BINARYNAME} artifact/.
         mkdir assets
-        cp build/${env.BINARYNAME} .
-        7z a assets/hopr-linux64.zip ${env.BINARYNAME}
+        cp build/${BINARYNAME} .
+        7z a assets/hopr-linux64.zip ${BINARYNAME}
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v3
