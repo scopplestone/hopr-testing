@@ -97,6 +97,7 @@ jobs:
         mkdir assets
         cp ${BINARYPATH} .
         BINARYNAME=$(ls hopr*x86_64.AppImage)
+        echo ${BINARYNAME}
         7z a assets/hopr-linux64.zip ${BINARYNAME}
 
     - name: Upload artifacts
