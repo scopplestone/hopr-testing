@@ -93,12 +93,12 @@ jobs:
       run: |
         echo ${BINARYPATH}
         mkdir artifact
-        cp ${BINARYPATH} artifact/.
         mkdir assets
         cp ${BINARYPATH} .
-        BINARYNAME=$(ls hopr*x86_64.AppImage)
+        echo "BINARYNAME=$(ls hopr*x86_64.AppImage)" >> $GITHUB_ENV
         echo ${BINARYNAME}
         7z a assets/hopr-linux64.zip ${BINARYNAME}
+        mv ${BINARYNAME} artifact/.
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v3
