@@ -76,7 +76,7 @@ jobs:
       uses: actions/github-script@v3
       with:
         script: |
-          core.setFailed('no binary found under build/hopr*x86_64.AppImage')
+          core.setFailed('no binary found under build/hopr*x86_64.AppImage. env.BINARYNAME = ${env.BINARYNAME}')
 
     - name: Create archives
       run: |
