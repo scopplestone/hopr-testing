@@ -71,12 +71,23 @@ jobs:
     - name: Set env
       run: echo "BINARYNAME=$(ls build/hopr*x86_64.AppImage)" >> $GITHUB_ENV
 
+    - name: Test env variable
+      run: |
+        echo ${BINARYNAME}
+        echo ${env.BINARYNAME}
+        echo ${{env.BINARYNAME}}
+
+    - name: Check file existence
+      id: check_files
+      uses: andstor/file-existence-action@v1
+      with:
+        files: "${{ env.BINARYNAME }}"
+
     - name: Binary Check
-      if: ${{ env.BINARYNAME == "" }}
+      if: steps.check_files.outputs.files_exists == 'false'
       uses: actions/github-script@v3
       with:
         script: |
-          echo ${env.BINARYNAME}
           core.setFailed('no binary found under build/hopr*x86_64.AppImage.')
 
     - name: Create archives
