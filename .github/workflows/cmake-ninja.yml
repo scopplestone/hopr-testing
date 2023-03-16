@@ -72,7 +72,7 @@ jobs:
       run: echo "BINARYNAME=$(ls build/hopr*x86_64.AppImage)" >> $GITHUB_ENV
 
     - name: Binary Check
-      if: ${{ env.BINARYNAME }} == ""
+      if: ${{ env.BINARYNAME == "" }}
       uses: actions/github-script@v3
       with:
         script: |
