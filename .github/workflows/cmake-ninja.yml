@@ -95,6 +95,7 @@ jobs:
         mkdir artifacts
         mkdir assets
         cp ${BINARYPATH} .
+        ls -la
         echo "BINARYNAME=$(ls hopr*x86_64.AppImage)" >> $GITHUB_ENV
         echo "BINARYNAME=${BINARYNAME}"
         echo ${BINARYNAME}
