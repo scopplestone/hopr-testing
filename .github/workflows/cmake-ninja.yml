@@ -68,8 +68,11 @@ jobs:
         tree AppDir
         ./linuxdeploy-x86_64.AppImage --appdir AppDir --output appimage --desktop-file=../hopr.desktop
 
+    - name: Set env
+      run: echo "BINARYNAME=$(ls build/hopr*x86_64.AppImage)" >> $GITHUB_ENV
+
     - name: Binary Check
-      if: ${{ ls build/hopr*x86_64.AppImage }} == ''
+      if: ${{ env.BINARYNAME }} == ''
       uses: actions/github-script@v3
       with:
         script: |
@@ -77,12 +80,12 @@ jobs:
 
     - name: Create archives
       run: |
-        BINARYNAME=$(ls build/hopr*x86_64.AppImage)
+        echo ${env.BINARYNAME}
         mkdir artifact
-        cp build/${BINARYNAME} artifact/.
+        cp build/${env.BINARYNAME} artifact/.
         mkdir assets
-        cp build/${BINARYNAME} .
-        7z a assets/hopr-linux64.zip ${BINARYNAME}
+        cp build/${env.BINARYNAME} .
+        7z a assets/hopr-linux64.zip ${env.BINARYNAME}
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v3
