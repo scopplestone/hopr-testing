@@ -18,7 +18,8 @@ Install the package via
 
 ### AppImage
 
-Download the pre-compiled (on Centos7) executable from the [release tag assets](https://github.com/hopr-framework/hopr/releases) or from the [GitHub Actions builds](https://github.com/hopr-framework/hopr/actions/runs/4420444576) to get a bleeding-edge version.
+Download the pre-compiled (on Centos7) executable from the [release tag assets](https://github.com/hopr-framework/hopr/releases) or
+from the [GitHub Actions builds: cmake-ninja](https://github.com/hopr-framework/hopr/actions) to get a bleeding-edge version.
 
 The following table shows that there is no apparent drop in performance when using a pre-compiled executable:
 ```{table} Performance test with pre-compiled executable: Cart-2D 665600 #Elements
