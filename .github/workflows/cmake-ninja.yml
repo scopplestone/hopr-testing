@@ -71,7 +71,7 @@ jobs:
     - name: Set env
       run: |
         echo "BINARYPATH=$(ls build/hopr*x86_64.AppImage)" >> $GITHUB_ENV
-        echo "BINARYNAME=$(basename $BINARYPATH )" >> $GITHUB_ENV
+        echo "BINARYNAME=$(basename ${BINARYPATH})" >> $GITHUB_ENV
 
     - name: Test env variable
       run: |
