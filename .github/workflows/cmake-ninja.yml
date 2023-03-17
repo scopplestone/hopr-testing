@@ -23,6 +23,7 @@ jobs:
 
     - name: Dependencies
       run: |
+        ls -la .github
         curl -L -O https://github.com/Kitware/CMake/releases/download/v3.16.4/cmake-3.16.4-Linux-x86_64.sh
         chmod +x cmake-3.16.4-Linux-x86_64.sh
         ./cmake-3.16.4-Linux-x86_64.sh --skip-license --prefix=/usr/local
@@ -43,16 +44,11 @@ jobs:
       shell: bash
       # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
       # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
-      #run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
-      # hdf5-openmpi-devel on centos7 probably broken
-      #run: cmake -G Ninja -B ${{github.workspace}}/build -DLIBS_BUILD_HDF5=OFF -DCMAKE_BUILD_TYPE=Release -DLIBS_USE_MPI=OFF
-      #run: cmake -G Ninja -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=Release -DLIBS_USE_MPI=OFF  -DCMAKE_INSTALL_PREFIX=/usr
-      run: cmake -G Ninja -B build -DCMAKE_BUILD_TYPE=Release -DLIBS_USE_MPI=OFF  -DCMAKE_INSTALL_PREFIX=/usr
+      run: cmake -G Ninja -B build -DCMAKE_BUILD_TYPE=Release -DLIBS_USE_MPI=OFF -DCMAKE_INSTALL_PREFIX=/usr
 
     - name: Build
       shell: bash
       # Build your program with the given configuration
-      #run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
       run: cmake --build build
 
     - name: Create AppImage
@@ -62,7 +58,6 @@ jobs:
         DESTDIR=AppDir ninja install
         mkdir -p AppDir/usr/share/icons
         cp ../docs/Meshformat/pics/HOPR_logo.png AppDir/usr/share/icons/hopr.png
-        #curl -L -O https://github.com/linuxdeploy/linuxdeploy/releases/download/1-alpha-20220822-1/linuxdeploy-x86_64.AppImage
         curl -L -O https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage
         chmod +x linuxdeploy-x86_64.AppImage
         tree AppDir
@@ -79,8 +74,6 @@ jobs:
         echo ${{env.BINARYPATH}}
         echo ${BINARYNAME}
         echo ${{env.BINARYNAME}}
-        echo ${BINARYNAMEX}
-        echo ${{env.BINARYNAMEX}}
         cat src/buildinfo.h
 
     - name: Check file existence
@@ -98,13 +91,9 @@ jobs:
 
     - name: Create archives
       run: |
-        echo ${BINARYPATH}
         mkdir artifacts
         mkdir assets
         cp ${BINARYPATH} .
-        ls -la
-        echo "BINARYNAME=${BINARYNAME}"
-        echo ${BINARYNAME}
         7z a assets/hopr-linux64.zip ${BINARYNAME}
         mv ${BINARYNAME} artifacts/.
 
