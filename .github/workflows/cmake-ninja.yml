@@ -23,7 +23,7 @@ jobs:
       run: |
         #yum install -y git
         yum -y install epel-release
-        yum remove git
+        #yum remove git
         rpm -U https://centos7.iuscommunity.org/ius-release.rpm
         yum -y install git2u
         git --version
