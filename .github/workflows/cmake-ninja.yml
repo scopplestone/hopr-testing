@@ -19,15 +19,11 @@ jobs:
       options: --privileged
 
     steps:
-    - name: Force Install GIT
+    - name: Install GIT
       run: |
         yum -y install https://packages.endpointdev.com/rhel/7/os/x86_64/endpoint-repo.x86_64.rpm
         yum -y install git
         git --version
-
-    #- uses: actions/checkout@v3
-      #with:
-        #fetch-depth: 0
 
     - name: Checkout code
       uses: actions/checkout@v3
@@ -36,11 +32,6 @@ jobs:
 
     - name: Dependencies
       run: |
-        pwd
-        ls -la .github
-        pwd
-        ls -la
-        pwd
         git config --global --add safe.directory '*'
         git status
         curl -L -O https://github.com/Kitware/CMake/releases/download/v3.16.4/cmake-3.16.4-Linux-x86_64.sh
@@ -87,17 +78,17 @@ jobs:
         echo "BINARYPATH=$(ls build/hopr*x86_64.AppImage)" >> $GITHUB_ENV
         echo "BINARYNAME=$(basename $(ls build/hopr*x86_64.AppImage))" >> $GITHUB_ENV
 
-    - name: Test env variable
-      run: |
-        echo ${BINARYPATH}
-        echo ${{env.BINARYPATH}}
-        echo ${BINARYNAME}
-        echo ${{env.BINARYNAME}}
-        cat src/buildinfo.h
+    #- name: Test env variable
+      #run: |
+        #echo ${BINARYPATH}
+        #echo ${{env.BINARYPATH}}
+        #echo ${BINARYNAME}
+        #echo ${{env.BINARYNAME}}
+        #cat src/buildinfo.h
 
     - name: Check file existence
       id: check_files
-      uses: andstor/file-existence-action@v1
+      uses: andstor/file-existence-action@v2
       with:
         files: "${{ env.BINARYPATH }}"
 
