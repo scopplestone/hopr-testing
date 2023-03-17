@@ -69,7 +69,9 @@ jobs:
         ./linuxdeploy-x86_64.AppImage --appdir AppDir --output appimage --desktop-file=../hopr.desktop
 
     - name: Set env
-      run: echo "BINARYPATH=$(ls build/hopr*x86_64.AppImage)" >> $GITHUB_ENV
+      run: |
+        echo "BINARYPATH=$(ls build/hopr*x86_64.AppImage)" >> $GITHUB_ENV
+        echo "BINARYNAME=$(basename $BINARYPATH )" >> $GITHUB_ENV
 
     - name: Test env variable
       run: |
@@ -96,7 +98,6 @@ jobs:
         mkdir assets
         cp ${BINARYPATH} .
         ls -la
-        echo "BINARYNAME=$(ls hopr*.AppImage)" >> $GITHUB_ENV
         echo "BINARYNAME=${BINARYNAME}"
         echo ${BINARYNAME}
         7z a assets/hopr-linux64.zip ${BINARYNAME}
