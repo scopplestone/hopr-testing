@@ -22,10 +22,10 @@ jobs:
     - name: Force Install GIT
       run: |
         #yum install -y git
-        yum install epel-release
+        yum -y install epel-release
         yum remove git
         rpm -U https://centos7.iuscommunity.org/ius-release.rpm
-        yum install git2u
+        yum -y install git2u
         git --version
 
     #- uses: actions/checkout@v3
