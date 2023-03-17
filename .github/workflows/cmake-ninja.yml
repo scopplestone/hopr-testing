@@ -74,11 +74,16 @@ jobs:
         cd build
         echo "BINARYNAME=$(ls hopr*x86_64.AppImage)" >> $GITHUB_ENV
         cd ../
+        echo "BINARYNAMEX=$(basename $(ls build/hopr*x86_64.AppImage))" >> $GITHUB_ENV
 
     - name: Test env variable
       run: |
         echo ${BINARYPATH}
         echo ${{env.BINARYPATH}}
+        echo ${BINARYNAME}
+        echo ${{env.BINARYNAME}}
+        echo ${BINARYNAMEX}
+        echo ${{env.BINARYNAMEX}}
 
     - name: Check file existence
       id: check_files
