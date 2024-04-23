@@ -69,8 +69,6 @@ html_theme_options = {
     'navigation_depth': 4,
 }
 
-html_extra_path = ['tutorials/figures']
-
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
@@ -98,3 +96,5 @@ autosectionlabel_prefix_document = True
 # -- Table and Figure labelling ----------------------------------------------
 # Activate using: {numref}`tab:some-name` -> Table 1
 numfig = True
+
+html_extra_path = ['tutorials/figures/']
