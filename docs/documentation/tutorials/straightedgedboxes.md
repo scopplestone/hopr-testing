@@ -1,7 +1,7 @@
 # Straight-Edged Boxes
 HOPR has several simple built-in mesh generators.
 <figure class="align-center" id="fig-cartbox-multiple-stretch-mesh">
-    <a class="reference internal image-reference" href="../../../tutorials/figures/Cartbox_multiple_stretch_mesh.png"><img alt="../../../tutorials/figures/Cartbox_multiple_stretch_mesh.png" src="../../../tutorials/figures/Cartbox_multiple_stretch_mesh.png" style="width: 700px;" /></a>
+    <a class="reference internal image-reference" href="figures/Cartbox_multiple_stretch_mesh.png"><img alt="figures/Cartbox_multiple_stretch_mesh.png" src="../../../tutorials/figures/Cartbox_multiple_stretch_mesh.png" style="width: 700px;" /></a>
     <figcaption>
     <p><span class="caption-number">Fig. 1.1 </span><span class="caption-text">HOPR output: Mesh of multiple cartesian boxes with a stretched element arrangement.</span><a class="headerlink" href="#fig-cartbox-multiple-stretch-mesh" title="Permalink to this image"></a></p>
     </figcaption>
