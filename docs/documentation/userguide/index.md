@@ -1,6 +1,6 @@
 # User Guide
 
-HOPR ...
+This user guide describes the installation procedure and the mesh format used in hopr.
 
 ```{toctree}
 ---
@@ -20,3 +20,6 @@ the simulation code's features from a user and a developer point of view.
 
 * Chapter {ref}`userguide/installation:Installation` contains step by step instructions from obtaining the source
   code up to running hopr and visualizing the generated mesh.
+* Chapter {ref}`userguide/meshformat:HOPR HDF5 Curved Mesh Format`  ...
+* Chapter {ref}`userguide/appendix:Appendix` contains additional information, e.g., tested compiler and library versions
+* Chapter {ref}`userguide/parameters:List of Parameters` ...
