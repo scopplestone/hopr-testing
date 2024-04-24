@@ -1,6 +1,7 @@
 # User Guide
 
-This user guide describes the installation procedure and the mesh format used in hopr.
+This user guide describes the installation procedure and the mesh format used in hopr and is intended for people using hopr as a
+mesh generator.
 
 ```{toctree}
 ---
